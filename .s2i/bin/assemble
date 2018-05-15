@@ -39,6 +39,7 @@ if [ -n "$COMPOSER_MIRROR" ]; then
 fi
 
 mkdir -p ./.composer/
+mkdir -p ./magento
 
 export COMPOSER_HOME=./.composer/
 
@@ -46,7 +47,9 @@ cp ./auth.json ./.composer/
 
 echo "Creating Magento project ..."
 
-./composer.phar create-project --repository-url=https://repo.magento.com/ magento/project-community-edition ./
+./composer.phar create-project --repository-url=https://repo.magento.com/ magento/project-community-edition ./magento
+
+mv ./magento/* ./
 
 echo "Updating permissions for Magento folder ..."
 
