@@ -39,25 +39,27 @@ if [ -n "$COMPOSER_MIRROR" ]; then
 fi
 
 mkdir -p ./.composer/
-mkdir -p ./magento
 
 export COMPOSER_HOME=./.composer/
 
 cp ./auth.json ./.composer/
 
-echo "Creating Magento project ..."
-
-./composer.phar create-project --repository-url=https://repo.magento.com/ magento/project-community-edition ./magento
-
-mv ./magento/* ./
-
 echo "Updating permissions for Magento folder ..."
 
-find ./magento/var ./magento/vendor ./magento/pub/static ./magento/pub/media ./magento/app/etc -type f -exec chmod g+w {} \; && find ./magento/var ./magento/vendor ./magento/pub/static ./magento/pub/media ./magento/app/etc -type d -exec chmod 775 {} \; && chmod u+x ./magento/bin/magento
+cd ./
+
+find var vendor pub/static pub/media app/etc -type f -exec chmod u+w {} \; && find var vendor pub/static pub/media app/etc -type d -exec chmod u+w {} \; && chmod u+x bin/magento
+
+# Install App dependencies using Composer
+./composer.phar install --no-interaction --no-ansi --optimize-autoloader $COMPOSER_ARGS
+
+find var vendor pub/static pub/media app/etc -type f -exec chmod u+w {} \; && find var vendor pub/static pub/media app/etc -type d -exec chmod u+w {} \; && chmod u+x bin/magento
 
 echo "Installing Magento ..."
 
-php ./magento/bin/magento setup:install --db-host=${DATABASE_SERVICE_NAME} --db-name=${DATABASE_NAME} --db-user=${DATABASE_USER} --db-password=${DATABASE_PASSWORD} --backend-frontname=admin --admin-user=infinity2067 --admin-password=84730*estinkill --admin-email=thangtd@gmail.com --admin-firstname=Henry --admin-lastname=Tran --base-url=http://m2-mysql-persistent-m2.192.168.1.8.nip.io/ --base-url-secure=https://m2-mysql-persistent-m2.192.168.1.8.nip.io/ --language=en_US --currency=USD --use-rewrites=1 --use-secure=0 --use-secure-admin=0 --cleanup-database
+php ./bin/magento setup:install --db-host=${DATABASE_SERVICE_NAME} --db-name=${DATABASE_NAME} --db-user=${DATABASE_USER} --db-password=${DATABASE_PASSWORD} --backend-frontname=admin --admin-user=infinity2067 --admin-password=84730*estinkill --admin-email=thangtd@gmail.com --admin-firstname=Henry --admin-lastname=Tran --base-url=http://m2-mysql-persistent-m2.192.168.1.8.nip.io/ --base-url-secure=https://m2-mysql-persistent-m2.192.168.1.8.nip.io/ --language=en_US --currency=USD --use-rewrites=1 --use-secure=0 --use-secure-admin=0 --cleanup-database
+
+find var vendor pub/static pub/media app/etc -type f -exec chmod u+w {} \; && find var vendor pub/static pub/media app/etc -type d -exec chmod u+w {} \; && chmod u+x bin/magento
 
 # You can write S2I scripts in any programming language, as long as the 
 # scripts are executable inside the builder image.
