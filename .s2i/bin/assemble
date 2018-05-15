@@ -1,4 +1,3 @@
 #!/bin/bash -e
 
 mkdir -p /tmp/testassemblem2
-
