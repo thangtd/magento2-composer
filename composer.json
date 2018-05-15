@@ -12,6 +12,6 @@
         "psr-4": { "Rivsen\\Demo\\": "src" }
     },
     "require": {
-		"ehime/hello-world"
+		"ehime/hello-world": "*"
 	}
 }
