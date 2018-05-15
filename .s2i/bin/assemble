@@ -9,35 +9,6 @@ source ${STI_SCRIPTS_PATH}/assemble
 
 mkdir -p /tmp/postassemble
 
-# Install Composer
-TEMPFILE=$(mktemp)
-RETRIES=6
-for ((i=0; i<$RETRIES; i++)); do
-
-if [ -z "$COMPOSER_INSTALLER" ]; then
-  export COMPOSER_INSTALLER="https://getcomposer.org/installer"
-fi
-
-echo "Downloading $COMPOSER_INSTALLER, attempt $((i+1))/$RETRIES"
-curl -o $TEMPFILE $COMPOSER_INSTALLER && break
-sleep 10
-done
-if [[ $i == $RETRIES ]]; then
-echo "Download failed, giving up."
-exit 1
-fi
-php <$TEMPFILE
-
-if [ "$(ls -a /tmp/artifacts/ 2>/dev/null)" ]; then
-echo "Restoring build artifacts"
-mv /tmp/artifacts/* $HOME/
-fi
-
-# Change the repo mirror if provided
-if [ -n "$COMPOSER_MIRROR" ]; then
-./composer.phar config -g repositories.packagist composer $COMPOSER_MIRROR
-fi
-
 mkdir -p ./.composer/
 
 export COMPOSER_HOME=./.composer/
@@ -56,6 +27,8 @@ find var vendor pub/static pub/media app/etc -type f -exec chmod u+w {} \; && fi
 find var vendor pub/static pub/media app/etc -type f -exec chmod u+w {} \; && find var vendor pub/static pub/media app/etc -type d -exec chmod u+w {} \; && chmod u+x bin/magento
 
 echo "Installing Magento ..."
+
+php ./bin/magento list
 
 php ./bin/magento setup:install --db-host=${DATABASE_SERVICE_NAME} --db-name=${DATABASE_NAME} --db-user=${DATABASE_USER} --db-password=${DATABASE_PASSWORD} --backend-frontname=admin --admin-user=infinity2067 --admin-password=84730*estinkill --admin-email=thangtd@gmail.com --admin-firstname=Henry --admin-lastname=Tran --base-url=http://m2-mysql-persistent-m2.192.168.1.8.nip.io/ --base-url-secure=https://m2-mysql-persistent-m2.192.168.1.8.nip.io/ --language=en_US --currency=USD --use-rewrites=1 --use-secure=0 --use-secure-admin=0 --cleanup-database
 
