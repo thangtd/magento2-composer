@@ -42,7 +42,7 @@ mkdir -p ./.composer/
 
 export COMPOSER_HOME=./.composer/
 
-cp /tmp/src/auth.json ./.composer/
+cp ./auth.json ./.composer/
 
 echo "Creating Magento project ..."
 
