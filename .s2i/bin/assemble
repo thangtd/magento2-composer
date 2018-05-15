@@ -1,3 +1,15 @@
 #!/bin/bash -e
+# The assemble script builds the application artifacts from a source and 
+# places them into appropriate directories inside the image.
 
-mkdir -p /tmp/testassemblem2
+mkdir -p /tmp/preassemble
+
+# Execute the default S2I script
+source ${STI_SCRIPTS_PATH}/assemble
+
+mkdir -p /tmp/postassemble
+
+find ./var ./vendor ./pub/static ./pub/media ./app/etc -type f -exec chmod g+w {} \; && find ./var ./vendor ./pub/static ./pub/media ./app/etc -type d -exec chmod 775 {} \; && chmod u+x ./bin/magento
+
+# You can write S2I scripts in any programming language, as long as the 
+# scripts are executable inside the builder image.
