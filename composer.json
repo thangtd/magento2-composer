@@ -1,59 +1,17 @@
 {
-    "name": "magento/magento2ce",
-    "description": "Magento 2 (Community Edition)",
-    "type": "project",
-    "version": "2.1.11",
-    "license": [
-        "OSL-3.0",
-        "AFL-3.0"
+    "name": "rivsen/hello-world",
+    "description": "this is a hello world repo for composer.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rivsen Tan",
+            "email": "rivsen1003@gmail.com"
+        }
     ],
-    "require": {
-        "php": "~5.6.5|7.0.2|7.0.4|~7.0.6",
-		"ehime/hello-world"
-    },
-    "extra": {
-        "component_paths": {
-            "trentrichardson/jquery-timepicker-addon": "lib/web/jquery/jquery-ui-timepicker-addon.js",
-            "components/jquery": [
-                "lib/web/jquery.js",
-                "lib/web/jquery/jquery.min.js",
-                "lib/web/jquery/jquery-migrate.js"
-            ],
-            "blueimp/jquery-file-upload": "lib/web/jquery/fileUploader",
-            "components/jqueryui": [
-                "lib/web/jquery/jquery-ui.js"
-            ],
-            "twbs/bootstrap": [
-                "lib/web/jquery/jquery.tabs.js"
-            ],
-            "tinymce/tinymce": "lib/web/tiny_mce"
-        }
-    },
-    "config": {
-        "use-include-path": true
-    },
     "autoload": {
-        "psr-4": {
-            "Magento\\Framework\\": "lib/internal/Magento/Framework/",
-            "Magento\\Setup\\": "setup/src/Magento/Setup/",
-            "Magento\\": "app/code/Magento/"
-        },
-        "psr-0": {
-            "": "app/code/"
-        },
-        "files": [
-            "app/etc/NonComposerComponentRegistration.php"
-        ]
+        "psr-4": { "Rivsen\\Demo\\": "src" }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Magento\\Sniffs\\": "dev/tests/static/framework/Magento/Sniffs/",
-            "Magento\\Tools\\": "dev/tools/Magento/Tools/",
-            "Magento\\Tools\\Sanity\\": "dev/build/publication/sanity/Magento/Tools/Sanity/",
-            "Magento\\TestFramework\\Inspection\\": "dev/tests/static/framework/Magento/TestFramework/Inspection/",
-            "Magento\\TestFramework\\Utility\\": "dev/tests/static/framework/Magento/TestFramework/Utility/"
-        }
-    },
-    "minimum-stability": "alpha",
-    "prefer-stable": true
+    "require": {
+		"ehime/hello-world"
+	}
 }
