@@ -15,7 +15,6 @@ find ./var ./vendor ./pub/static ./pub/media ./app/etc -type f -exec chmod g+w {
 
 echo "Installing Magento ..."
 
-php ./bin/magento setup:install --db-host=${DATABASE_SERVICE_NAME} --db-name=${DATABASE_NAME} --db-user=${DATABASE_USER} --db-password=${DATABASE_PASSWORD} --backend-frontname=admin --admin-user=infinity2067 --admin-password=84730*estinkill --admin-email=thangtd@gmail.com --admin-firstname=Henry --admin-lastname=Tran --base-url=http://m2-mysql-persistent-m2.192.168.1.8.nip.io/ --base-url-secure=https://m2-mysql-persistent-m2.192.168.1.8.nip.io/ --language=en_US --currency=USD --use-rewrites=1 --use-secure=0 --use-secure-admin=0 --cleanup-database
 
 # You can write S2I scripts in any programming language, as long as the 
 # scripts are executable inside the builder image.

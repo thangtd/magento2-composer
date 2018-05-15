@@ -11,7 +11,6 @@ mkdir -p /tmp/postrun
 
 echo "Deploying static content ..."
 
-php ./bin/magento setup:static-content:deploy
 
 # You can write S2I scripts in any programming language, as long as the 
 # scripts are executable inside the builder image.
