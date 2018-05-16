@@ -9,8 +9,5 @@ source ${STI_SCRIPTS_PATH}/run
 
 mkdir -p /tmp/postrun
 
-echo "Deploying static content ..."
-
-
 # You can write S2I scripts in any programming language, as long as the 
 # scripts are executable inside the builder image.
