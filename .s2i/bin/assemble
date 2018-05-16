@@ -15,19 +15,18 @@ export COMPOSER_HOME=./.composer/
 
 cp ./auth.json ./.composer/
 
-echo "Updating permissions for Magento folder ..."
+echo "BUILD: Updating permissions for Magento folder ..."
 
 cd ${APP_DATA}
 
-ls -l ${APP_DATA}/var
+find var vendor pub/static pub/media app/etc -type f -exec chmod g+w {} \;
+find var vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} \;
+chmod u+x bin/magento
+chown -R :root .
 
-find ${APP_DATA}/var ${APP_DATA}/vendor ${APP_DATA}/pub/static ${APP_DATA}/pub/media ${APP_DATA}/app/etc -type f -exec chmod u+w {} \; && find ${APP_DATA}/var ${APP_DATA}/vendor ${APP_DATA}/pub/static ${APP_DATA}/pub/media ${APP_DATA}/app/etc -type d -exec chmod u+w {} \; && chmod u+x ${APP_DATA}/bin/magento
 
-echo "Updating permissions for Magento folder ..."
+# RUN chgrp -R 0 /some/directory && chmod -R g+rwX /some/directory
 
-chown -R default.root ${APP_DATA}/
-
-ls -l ${APP_DATA}/var
 
 # You can write S2I scripts in any programming language, as long as the 
 # scripts are executable inside the builder image.
