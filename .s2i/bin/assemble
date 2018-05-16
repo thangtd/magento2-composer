@@ -19,7 +19,7 @@ echo "BUILD: Updating permissions for Magento folder ..."
 
 cd ${APP_DATA}
 
-find ${APP_DATA}/var ${APP_DATA}/vendor ${APP_DATA}/pub/static ${APP_DATA}/pub/media ${APP_DATA}/app/etc -type f -exec chmod u+w {} \; && find ${APP_DATA}/var ${APP_DATA}/vendor ${APP_DATA}/pub/static ${APP_DATA}/pub/media ${APP_DATA}/app/etc -type d -exec chmod u+w {} \; && chmod u+x ${APP_DATA}/bin/magento
+find ${APP_DATA}/var ${APP_DATA}/vendor ${APP_DATA}/pub/static ${APP_DATA}/pub/media ${APP_DATA}/app/etc -type f -exec chmod 644 {} \; && find ${APP_DATA}/var ${APP_DATA}/vendor ${APP_DATA}/pub/static ${APP_DATA}/pub/media ${APP_DATA}/app/etc -type d -exec chmod 755 {} \; && chmod u+x ${APP_DATA}/bin/magento
 
 chown -R default.root ${APP_DATA}/
 
