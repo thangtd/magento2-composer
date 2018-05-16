@@ -139,6 +139,10 @@ class ObjectManagerFactory
         $argumentMapper = new \Magento\Framework\ObjectManager\Config\Mapper\Dom($argInterpreter);
 
         if ($env->getMode() != Environment\Compiled::MODE) {
+			var_dump($this->directoryList);
+			var_dump($this->driverPool);
+			var_dump($argumentMapper);
+			var_dump($appMode);
             $configData = $this->_loadPrimaryConfig($this->directoryList, $this->driverPool, $argumentMapper, $appMode);
             if ($configData) {
                 $diConfig->extend($configData);
