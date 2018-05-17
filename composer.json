@@ -7,6 +7,16 @@
         "OSL-3.0",
         "AFL-3.0"
     ],
+	"repositories": [
+	{
+	  "type": "composer",
+	  "url": "https://repo.magento.com/"
+	},
+	{
+	  "type":"composer",
+	  "url":"http://jenkins.netstarter.com/jenkins/job/Stack%20Satis/ws/web/"
+	}
+	],	
     "require": {
         "php": "~5.6.5|7.0.2|7.0.4|~7.0.6",
         "zendframework/zend-stdlib": "~2.4.6",
@@ -216,9 +226,10 @@
             "tinymce/tinymce": "lib/web/tiny_mce"
         }
     },
-    "config": {
-        "use-include-path": true
-    },
+	"config": {
+		"use-include-path": true,
+		"secure-http":false
+	},	
     "autoload": {
         "psr-4": {
             "Magento\\Framework\\": "lib/internal/Magento/Framework/",
