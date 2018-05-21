@@ -1,0 +1,37 @@
+node {
+ 	// Clean workspace before doing anything
+    deleteDir()
+
+    try {
+        stage ('Start') {
+        	echo "Start - Send Notification"
+			sleep 5
+        }
+		
+        stage ('Build') {
+        	openshiftBuild(buildConfig: 'm2-mysql-persistent', showBuildLogs: 'true')
+        }
+		
+        stage ('Test') {
+        	echo "Test"
+			sleep 5
+        }
+		
+        stage ('Deploy') {
+        	openshiftDeploy(deploymentConfig: 'm2-mysql-persistent')
+        }		
+		
+        stage ('3rd APIs') {
+        	echo "Trigger 3rd parties integration like Browser Testing, Record Deployment in NewRelic"
+        }		
+		
+      	stage ('Finish') {
+            echo "Finish and Clean Up"
+            deleteDir()
+        }
+    } catch (err) {
+        currentBuild.result = 'FAILED'
+        // Send email or another notification
+        throw err
+    }
+}
