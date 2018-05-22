@@ -2,12 +2,11 @@
 # The assemble script builds the application artifacts from a source and 
 # places them into appropriate directories inside the image.
 
-mkdir -p /tmp/preassemble
 
 # Execute the default S2I script
 source ${STI_SCRIPTS_PATH}/assemble
 
-mkdir -p /tmp/postassemble
+mkdir -p /opt/app-root/shared
 
 mkdir -p ./.composer/
 

@@ -35,6 +35,23 @@
       }
     },
     {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}"
+      },
+      "spec": {
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "resources": {
+          "requests": {
+            "storage": "${VOLUME_CAPACITY}"
+          }
+        }
+      }
+    },	
+    {
       "kind": "Service",
       "apiVersion": "v1",
       "metadata": {
@@ -196,6 +213,14 @@
             }
           },
           "spec": {
+            "volumes": [
+              {
+                "name": "${NAME}-data",
+                "persistentVolumeClaim": {
+                  "claimName": "${NAME}"
+                }
+              }
+            ],		  
             "containers": [
               {
                 "name": "magento-mysql-persistent",
@@ -205,6 +230,12 @@
                     "containerPort": 8080
                   }
                 ],
+                "volumeMounts": [
+                  {
+                    "name": "${NAME}-data",
+                    "mountPath": "/opt/app-root/shared"
+                  }
+                ],				
                 "readinessProbe": {
                   "timeoutSeconds": 3,
                   "initialDelaySeconds": 3,
